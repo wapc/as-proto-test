@@ -1,0 +1,8 @@
+
+syntax = "proto3";
+
+package prototest;
+
+message Test {
+  uint64 field_uint64 = 1;
+}
