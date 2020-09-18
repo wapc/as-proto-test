@@ -14,7 +14,7 @@ import (
 
 func main() {
 	ctx := context.Background()
-	code, err := ioutil.ReadFile("testdata/hello.wasm")
+	code, err := ioutil.ReadFile("assembly/hello.wasm")
 	if err != nil {
 		panic(err)
 	}
@@ -32,7 +32,24 @@ func main() {
 	defer instance.Close()
 
 	message := pb.Test{
-		FieldUint64: 12345,
+		FieldUint64:   12345,
+		FieldUint32:   12346,
+		FieldInt64:    -12347,
+		FieldInt32:    -12348,
+		FieldSint64:   -12349,
+		FieldSint32:   -12350,
+		FieldString:   "string",
+		FieldBool:     true,
+		FieldBytes:    []byte("bytes"),
+		FieldFloat:    1234.5,
+		FieldDouble:   61234.5,
+		FieldFixed32:  1111,
+		FieldFixed64:  2222,
+		FieldSfixed32: -3333,
+		FieldSfixed64: -4444,
+		FieldNested: &pb.Nested{
+			Foo: "bar",
+		},
 	}
 	payload, err := proto.Marshal(&message)
 	if err != nil {

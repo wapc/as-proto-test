@@ -2,19 +2,22 @@
 // source: test.proto
 
 /*
-Package prototest is a generated protocol buffer package.
+	Package prototest is a generated protocol buffer package.
 
-It is generated from these files:
-	test.proto
+	It is generated from these files:
+		test.proto
 
-It has these top-level messages:
-	Test
+	It has these top-level messages:
+		Test
+		Nested
 */
 package prototest
 
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
+
+import binary "encoding/binary"
 
 import io "io"
 
@@ -30,7 +33,22 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Test struct {
-	FieldUint64 uint64 `protobuf:"varint,1,opt,name=field_uint64,json=fieldUint64,proto3" json:"field_uint64,omitempty"`
+	FieldUint64   uint64  `protobuf:"varint,1,opt,name=field_uint64,json=fieldUint64,proto3" json:"field_uint64,omitempty"`
+	FieldUint32   uint32  `protobuf:"varint,2,opt,name=field_uint32,json=fieldUint32,proto3" json:"field_uint32,omitempty"`
+	FieldInt64    int64   `protobuf:"varint,3,opt,name=field_int64,json=fieldInt64,proto3" json:"field_int64,omitempty"`
+	FieldInt32    int32   `protobuf:"varint,4,opt,name=field_int32,json=fieldInt32,proto3" json:"field_int32,omitempty"`
+	FieldSint64   int64   `protobuf:"zigzag64,5,opt,name=field_sint64,json=fieldSint64,proto3" json:"field_sint64,omitempty"`
+	FieldSint32   int32   `protobuf:"zigzag32,6,opt,name=field_sint32,json=fieldSint32,proto3" json:"field_sint32,omitempty"`
+	FieldString   string  `protobuf:"bytes,7,opt,name=field_string,json=fieldString,proto3" json:"field_string,omitempty"`
+	FieldBool     bool    `protobuf:"varint,8,opt,name=field_bool,json=fieldBool,proto3" json:"field_bool,omitempty"`
+	FieldBytes    []byte  `protobuf:"bytes,9,opt,name=field_bytes,json=fieldBytes,proto3" json:"field_bytes,omitempty"`
+	FieldFloat    float32 `protobuf:"fixed32,10,opt,name=field_float,json=fieldFloat,proto3" json:"field_float,omitempty"`
+	FieldDouble   float64 `protobuf:"fixed64,11,opt,name=field_double,json=fieldDouble,proto3" json:"field_double,omitempty"`
+	FieldFixed32  uint32  `protobuf:"fixed32,12,opt,name=field_fixed32,json=fieldFixed32,proto3" json:"field_fixed32,omitempty"`
+	FieldFixed64  uint64  `protobuf:"fixed64,13,opt,name=field_fixed64,json=fieldFixed64,proto3" json:"field_fixed64,omitempty"`
+	FieldSfixed32 int32   `protobuf:"fixed32,14,opt,name=field_sfixed32,json=fieldSfixed32,proto3" json:"field_sfixed32,omitempty"`
+	FieldSfixed64 int64   `protobuf:"fixed64,15,opt,name=field_sfixed64,json=fieldSfixed64,proto3" json:"field_sfixed64,omitempty"`
+	FieldNested   *Nested `protobuf:"bytes,16,opt,name=field_nested,json=fieldNested" json:"field_nested,omitempty"`
 }
 
 func (m *Test) Reset()                    { *m = Test{} }
@@ -45,8 +63,130 @@ func (m *Test) GetFieldUint64() uint64 {
 	return 0
 }
 
+func (m *Test) GetFieldUint32() uint32 {
+	if m != nil {
+		return m.FieldUint32
+	}
+	return 0
+}
+
+func (m *Test) GetFieldInt64() int64 {
+	if m != nil {
+		return m.FieldInt64
+	}
+	return 0
+}
+
+func (m *Test) GetFieldInt32() int32 {
+	if m != nil {
+		return m.FieldInt32
+	}
+	return 0
+}
+
+func (m *Test) GetFieldSint64() int64 {
+	if m != nil {
+		return m.FieldSint64
+	}
+	return 0
+}
+
+func (m *Test) GetFieldSint32() int32 {
+	if m != nil {
+		return m.FieldSint32
+	}
+	return 0
+}
+
+func (m *Test) GetFieldString() string {
+	if m != nil {
+		return m.FieldString
+	}
+	return ""
+}
+
+func (m *Test) GetFieldBool() bool {
+	if m != nil {
+		return m.FieldBool
+	}
+	return false
+}
+
+func (m *Test) GetFieldBytes() []byte {
+	if m != nil {
+		return m.FieldBytes
+	}
+	return nil
+}
+
+func (m *Test) GetFieldFloat() float32 {
+	if m != nil {
+		return m.FieldFloat
+	}
+	return 0
+}
+
+func (m *Test) GetFieldDouble() float64 {
+	if m != nil {
+		return m.FieldDouble
+	}
+	return 0
+}
+
+func (m *Test) GetFieldFixed32() uint32 {
+	if m != nil {
+		return m.FieldFixed32
+	}
+	return 0
+}
+
+func (m *Test) GetFieldFixed64() uint64 {
+	if m != nil {
+		return m.FieldFixed64
+	}
+	return 0
+}
+
+func (m *Test) GetFieldSfixed32() int32 {
+	if m != nil {
+		return m.FieldSfixed32
+	}
+	return 0
+}
+
+func (m *Test) GetFieldSfixed64() int64 {
+	if m != nil {
+		return m.FieldSfixed64
+	}
+	return 0
+}
+
+func (m *Test) GetFieldNested() *Nested {
+	if m != nil {
+		return m.FieldNested
+	}
+	return nil
+}
+
+type Nested struct {
+	Foo string `protobuf:"bytes,1,opt,name=foo,proto3" json:"foo,omitempty"`
+}
+
+func (m *Nested) Reset()                    { *m = Nested{} }
+func (m *Nested) String() string            { return proto.CompactTextString(m) }
+func (*Nested) ProtoMessage()               {}
+func (*Nested) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{1} }
+
+func (m *Nested) GetFoo() string {
+	if m != nil {
+		return m.Foo
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*Test)(nil), "prototest.Test")
+	proto.RegisterType((*Nested)(nil), "prototest.Nested")
 }
 func (m *Test) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
@@ -68,6 +208,125 @@ func (m *Test) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintTest(dAtA, i, uint64(m.FieldUint64))
 	}
+	if m.FieldUint32 != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintTest(dAtA, i, uint64(m.FieldUint32))
+	}
+	if m.FieldInt64 != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintTest(dAtA, i, uint64(m.FieldInt64))
+	}
+	if m.FieldInt32 != 0 {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintTest(dAtA, i, uint64(m.FieldInt32))
+	}
+	if m.FieldSint64 != 0 {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintTest(dAtA, i, uint64((uint64(m.FieldSint64)<<1)^uint64((m.FieldSint64>>63))))
+	}
+	if m.FieldSint32 != 0 {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintTest(dAtA, i, uint64((uint32(m.FieldSint32)<<1)^uint32((m.FieldSint32>>31))))
+	}
+	if len(m.FieldString) > 0 {
+		dAtA[i] = 0x3a
+		i++
+		i = encodeVarintTest(dAtA, i, uint64(len(m.FieldString)))
+		i += copy(dAtA[i:], m.FieldString)
+	}
+	if m.FieldBool {
+		dAtA[i] = 0x40
+		i++
+		if m.FieldBool {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if len(m.FieldBytes) > 0 {
+		dAtA[i] = 0x4a
+		i++
+		i = encodeVarintTest(dAtA, i, uint64(len(m.FieldBytes)))
+		i += copy(dAtA[i:], m.FieldBytes)
+	}
+	if m.FieldFloat != 0 {
+		dAtA[i] = 0x55
+		i++
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.FieldFloat))))
+		i += 4
+	}
+	if m.FieldDouble != 0 {
+		dAtA[i] = 0x59
+		i++
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.FieldDouble))))
+		i += 8
+	}
+	if m.FieldFixed32 != 0 {
+		dAtA[i] = 0x65
+		i++
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldFixed32))
+		i += 4
+	}
+	if m.FieldFixed64 != 0 {
+		dAtA[i] = 0x69
+		i++
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldFixed64))
+		i += 8
+	}
+	if m.FieldSfixed32 != 0 {
+		dAtA[i] = 0x75
+		i++
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldSfixed32))
+		i += 4
+	}
+	if m.FieldSfixed64 != 0 {
+		dAtA[i] = 0x79
+		i++
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldSfixed64))
+		i += 8
+	}
+	if m.FieldNested != nil {
+		dAtA[i] = 0x82
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintTest(dAtA, i, uint64(m.FieldNested.Size()))
+		n1, err := m.FieldNested.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n1
+	}
+	return i, nil
+}
+
+func (m *Nested) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Nested) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Foo) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintTest(dAtA, i, uint64(len(m.Foo)))
+		i += copy(dAtA[i:], m.Foo)
+	}
 	return i, nil
 }
 
@@ -85,6 +344,64 @@ func (m *Test) Size() (n int) {
 	_ = l
 	if m.FieldUint64 != 0 {
 		n += 1 + sovTest(uint64(m.FieldUint64))
+	}
+	if m.FieldUint32 != 0 {
+		n += 1 + sovTest(uint64(m.FieldUint32))
+	}
+	if m.FieldInt64 != 0 {
+		n += 1 + sovTest(uint64(m.FieldInt64))
+	}
+	if m.FieldInt32 != 0 {
+		n += 1 + sovTest(uint64(m.FieldInt32))
+	}
+	if m.FieldSint64 != 0 {
+		n += 1 + sozTest(uint64(m.FieldSint64))
+	}
+	if m.FieldSint32 != 0 {
+		n += 1 + sozTest(uint64(m.FieldSint32))
+	}
+	l = len(m.FieldString)
+	if l > 0 {
+		n += 1 + l + sovTest(uint64(l))
+	}
+	if m.FieldBool {
+		n += 2
+	}
+	l = len(m.FieldBytes)
+	if l > 0 {
+		n += 1 + l + sovTest(uint64(l))
+	}
+	if m.FieldFloat != 0 {
+		n += 5
+	}
+	if m.FieldDouble != 0 {
+		n += 9
+	}
+	if m.FieldFixed32 != 0 {
+		n += 5
+	}
+	if m.FieldFixed64 != 0 {
+		n += 9
+	}
+	if m.FieldSfixed32 != 0 {
+		n += 5
+	}
+	if m.FieldSfixed64 != 0 {
+		n += 9
+	}
+	if m.FieldNested != nil {
+		l = m.FieldNested.Size()
+		n += 2 + l + sovTest(uint64(l))
+	}
+	return n
+}
+
+func (m *Nested) Size() (n int) {
+	var l int
+	_ = l
+	l = len(m.Foo)
+	if l > 0 {
+		n += 1 + l + sovTest(uint64(l))
 	}
 	return n
 }
@@ -150,6 +467,359 @@ func (m *Test) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldUint32", wireType)
+			}
+			m.FieldUint32 = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FieldUint32 |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldInt64", wireType)
+			}
+			m.FieldInt64 = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FieldInt64 |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldInt32", wireType)
+			}
+			m.FieldInt32 = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FieldInt32 |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldSint64", wireType)
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
+			m.FieldSint64 = int64(v)
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldSint32", wireType)
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.FieldSint32 = v
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldString", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTest
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FieldString = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldBool", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.FieldBool = bool(v != 0)
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldBytes", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTest
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FieldBytes = append(m.FieldBytes[:0], dAtA[iNdEx:postIndex]...)
+			if m.FieldBytes == nil {
+				m.FieldBytes = []byte{}
+			}
+			iNdEx = postIndex
+		case 10:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldFloat", wireType)
+			}
+			var v uint32
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			iNdEx += 4
+			m.FieldFloat = float32(math.Float32frombits(v))
+		case 11:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldDouble", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			iNdEx += 8
+			m.FieldDouble = float64(math.Float64frombits(v))
+		case 12:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldFixed32", wireType)
+			}
+			m.FieldFixed32 = 0
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FieldFixed32 = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			iNdEx += 4
+		case 13:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldFixed64", wireType)
+			}
+			m.FieldFixed64 = 0
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FieldFixed64 = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			iNdEx += 8
+		case 14:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldSfixed32", wireType)
+			}
+			m.FieldSfixed32 = 0
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FieldSfixed32 = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			iNdEx += 4
+		case 15:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldSfixed64", wireType)
+			}
+			m.FieldSfixed64 = 0
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FieldSfixed64 = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			iNdEx += 8
+		case 16:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldNested", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTest
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.FieldNested == nil {
+				m.FieldNested = &Nested{}
+			}
+			if err := m.FieldNested.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTest(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthTest
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Nested) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTest
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Nested: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Nested: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Foo", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTest
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTest
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Foo = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTest(dAtA[iNdEx:])
@@ -279,12 +949,28 @@ var (
 func init() { proto.RegisterFile("test.proto", fileDescriptorTest) }
 
 var fileDescriptorTest = []byte{
-	// 102 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2a, 0x49, 0x2d, 0x2e,
-	0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x04, 0x53, 0x20, 0x01, 0x25, 0x4d, 0x2e, 0x96,
-	0x90, 0xd4, 0xe2, 0x12, 0x21, 0x45, 0x2e, 0x9e, 0xb4, 0xcc, 0xd4, 0x9c, 0x94, 0xf8, 0xd2, 0xcc,
-	0xbc, 0x12, 0x33, 0x13, 0x09, 0x46, 0x05, 0x46, 0x0d, 0x96, 0x20, 0x6e, 0xb0, 0x58, 0x28, 0x58,
-	0xc8, 0x49, 0xe0, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c,
-	0xf1, 0x58, 0x8e, 0x21, 0x89, 0x0d, 0x6c, 0x8e, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x2f, 0xd8,
-	0xfd, 0x15, 0x5c, 0x00, 0x00, 0x00,
+	// 366 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x92, 0x4d, 0xaa, 0xdb, 0x30,
+	0x14, 0x85, 0x7b, 0x13, 0xc7, 0x89, 0x95, 0x3f, 0x47, 0x23, 0x51, 0xa8, 0x7b, 0x9b, 0x52, 0xb8,
+	0xa3, 0x0c, 0x6c, 0xe3, 0x05, 0x84, 0x12, 0xe8, 0xa4, 0x03, 0xa7, 0x1d, 0x87, 0x1a, 0x2b, 0xc5,
+	0x60, 0xa2, 0x12, 0x2b, 0xd0, 0xee, 0xa4, 0x4b, 0x6a, 0x67, 0x5d, 0x42, 0xc9, 0xdb, 0xc8, 0xc3,
+	0x92, 0xf2, 0xec, 0x64, 0x64, 0xe9, 0xf3, 0xa7, 0x73, 0x8f, 0x40, 0x8c, 0x69, 0xd9, 0xe8, 0xcd,
+	0x8f, 0xb3, 0xd2, 0x8a, 0x07, 0xe6, 0xd3, 0x82, 0xf5, 0x5f, 0x8f, 0x79, 0x5f, 0x64, 0xa3, 0xf9,
+	0x3b, 0x36, 0x3b, 0x56, 0xb2, 0x2e, 0x0f, 0x97, 0xea, 0xa4, 0xb3, 0x54, 0x00, 0x02, 0x79, 0xf9,
+	0xd4, 0xb0, 0xaf, 0x06, 0xdd, 0x2b, 0x49, 0x2c, 0x06, 0x08, 0x34, 0xef, 0x29, 0x49, 0xcc, 0xdf,
+	0x32, 0xbb, 0x3d, 0xd8, 0x90, 0x21, 0x02, 0x0d, 0x73, 0x66, 0xd0, 0x27, 0x93, 0xd1, 0x17, 0x92,
+	0x58, 0x78, 0x08, 0x34, 0xea, 0x84, 0x24, 0xee, 0x86, 0x34, 0x36, 0x62, 0x84, 0x40, 0xdc, 0x0d,
+	0xd9, 0x3f, 0xf4, 0x68, 0x6c, 0x88, 0x8f, 0x40, 0xab, 0x9e, 0x72, 0x97, 0xa2, 0xcf, 0xd5, 0xe9,
+	0xbb, 0x18, 0x23, 0x50, 0x70, 0x53, 0x0c, 0xe2, 0x6f, 0x98, 0x1d, 0x7b, 0x28, 0x94, 0xaa, 0xc5,
+	0x04, 0x81, 0x26, 0x79, 0x60, 0xc8, 0x56, 0xa9, 0xba, 0x2b, 0x5a, 0xfc, 0xd2, 0xb2, 0x11, 0x01,
+	0x02, 0xcd, 0x5c, 0xd1, 0x6d, 0x4b, 0x3a, 0xe1, 0x58, 0xab, 0x6f, 0x5a, 0x30, 0x04, 0x1a, 0x38,
+	0x61, 0xd7, 0x92, 0xae, 0x43, 0xa9, 0x2e, 0x45, 0x2d, 0xc5, 0x14, 0x81, 0xc0, 0x75, 0xf8, 0x68,
+	0x10, 0x7f, 0xcf, 0xe6, 0x2e, 0xa3, 0xfa, 0x29, 0xcb, 0x24, 0x16, 0x33, 0x04, 0x1a, 0xe7, 0xf6,
+	0xdc, 0xce, 0xb2, 0x07, 0x29, 0x4b, 0xc5, 0x1c, 0x81, 0xfc, 0xbe, 0x94, 0xa5, 0xfc, 0x03, 0x5b,
+	0xb8, 0x0b, 0xdf, 0xa2, 0x16, 0x08, 0xb4, 0xcc, 0xed, 0xd1, 0xbd, 0x83, 0x8f, 0x5a, 0x96, 0x8a,
+	0x25, 0x02, 0x85, 0x77, 0x5a, 0x96, 0xf2, 0xf4, 0x56, 0xfd, 0x24, 0x1b, 0x2d, 0x4b, 0x11, 0x22,
+	0xd0, 0x34, 0x5e, 0x6d, 0x5e, 0xde, 0xcd, 0xe6, 0xb3, 0xf9, 0xe1, 0x6e, 0x63, 0x37, 0xeb, 0xd7,
+	0xcc, 0xb7, 0x2b, 0x1e, 0xb2, 0xe1, 0x51, 0x29, 0xf3, 0x86, 0x82, 0xbc, 0x5d, 0x6e, 0xc3, 0x3f,
+	0xd7, 0x08, 0xfe, 0x5d, 0x23, 0xf8, 0x7f, 0x8d, 0xe0, 0xf7, 0x53, 0xf4, 0xaa, 0xf0, 0x4d, 0x58,
+	0xf2, 0x1c, 0x00, 0x00, 0xff, 0xff, 0xd6, 0x8a, 0xe8, 0x96, 0x99, 0x02, 0x00, 0x00,
 }

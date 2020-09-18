@@ -5,4 +5,23 @@ package prototest;
 
 message Test {
   uint64 field_uint64 = 1;
+  uint32 field_uint32 = 2;
+  int64 field_int64 = 3;
+  int32 field_int32 = 4;
+  sint64 field_sint64 = 5;
+  sint32 field_sint32 = 6;
+  string field_string = 7;
+  bool field_bool = 8;
+  bytes field_bytes = 9;
+  float field_float = 10;
+  double field_double = 11;
+  fixed32 field_fixed32 = 12;
+  fixed64 field_fixed64 = 13;
+  sfixed32 field_sfixed32 = 14;
+  sfixed64 field_sfixed64 = 15;
+  Nested field_nested = 16;
+}
+
+message Nested {
+  string foo = 1;
 }
